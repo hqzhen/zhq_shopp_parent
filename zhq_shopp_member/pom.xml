@@ -11,5 +11,14 @@
 
     <artifactId>zhq_shopp_member</artifactId>
 
+    <dependencies>
+        <!--引用对外暴露的Api项目-->
+        <dependency>
+            <groupId>com.zhq</groupId>
+            <artifactId>zhq_shopp_member_api</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 
 </project>
