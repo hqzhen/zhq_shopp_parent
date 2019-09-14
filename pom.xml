@@ -11,6 +11,7 @@
         <module>zhq_shopp_eurekaserver</module>
         <module>zhq_shopp_member</module>
         <module>zhq_shopp_api</module>
+        <module>zhq_shopp_common</module>
     </modules>
     <packaging>pom</packaging>
 
