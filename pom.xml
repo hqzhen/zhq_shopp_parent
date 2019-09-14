@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
     <modules>
         <module>zhq_shopp_eurekaserver</module>
+        <module>zhq_shopp_member</module>
+        <module>zhq_shopp_api</module>
     </modules>
     <packaging>pom</packaging>
 
