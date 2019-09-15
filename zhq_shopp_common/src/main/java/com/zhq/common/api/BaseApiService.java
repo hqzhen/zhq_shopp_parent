@@ -77,6 +77,15 @@ public class BaseApiService {
         return setResult(BaseApiServiceConstants.HTTP_RES_CODE_500,BaseApiServiceConstants.HTTP_RES_CODE_500_VALUE,null);
     }
 
+    /**
+     * 返回错误
+     * @return
+     */
+    public Map<String,Object> setResultParameterError(String msg){
+
+        return setResult(BaseApiServiceConstants.HTTP_RES_CODE_400,msg,null);
+    }
+
 
 
 }

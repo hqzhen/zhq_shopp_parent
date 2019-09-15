@@ -1,4 +1,4 @@
-package com.zhq.common.api;
+package com.zhq.common.redis;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
