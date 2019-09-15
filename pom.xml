@@ -12,6 +12,7 @@
         <module>zhq_shopp_member</module>
         <module>zhq_shopp_api</module>
         <module>zhq_shopp_common</module>
+        <module>zhq_shopp_message</module>
     </modules>
     <packaging>pom</packaging>
 

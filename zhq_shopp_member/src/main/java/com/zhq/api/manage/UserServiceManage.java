@@ -15,4 +15,12 @@ public interface UserServiceManage {
      * @param userEntity
      */
     public void register(UserEntity userEntity);
+
+    /**
+     * 密码加盐
+     * @param phone
+     * @param password
+     * @return
+     */
+    public String md5PassSalt(String phone,String password);
 }
