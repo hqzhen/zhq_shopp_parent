@@ -1,5 +1,6 @@
 package com.zhq.common.log;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
@@ -56,7 +57,7 @@ public class LogAspectServiceApi {
     public void methodAfterReturning(Object o) {
         log.info("--------------返回内容----------------");
         try {
-            log.info("Response内容:" + jsonObject.toJSONString(o));
+            log.info("Response内容:" + JSON.toJSONString(o));
         } catch (Exception e) {
             log.error("###LogAspectServiceApi.class methodAfterReturing() ### ERROR:", e);
         }
