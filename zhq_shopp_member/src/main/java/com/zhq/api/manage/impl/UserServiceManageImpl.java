@@ -61,7 +61,7 @@ public class UserServiceManageImpl implements UserServiceManage {
      */
     @Override
     public String md5PassSalt(String phone, String password) {
-        return MD5Util.MD5(phone+password);
+        return MD5Util.MD5(password);
     }
 
     /**

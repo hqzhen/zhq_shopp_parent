@@ -22,5 +22,8 @@ public interface UserDao extends BaseDao {
     @Insert("INSERT  INTO `mb_user`  (username,password,phone,email,created,updated) VALUES (#{username}, #{password},#{phone},#{email},#{created},#{updated});")
     Integer insertUser(UserEntity userEntity);
 
+    @Select("select  id,username,password,phone,email,created,updated from mb_user where username =#{userName} and password=#{password}")
+    UserEntity login(@Param("userName") String userName,@Param("password") String password);
+
 
 }

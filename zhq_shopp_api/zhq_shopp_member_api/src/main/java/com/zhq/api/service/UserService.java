@@ -23,12 +23,34 @@ public interface UserService {
      * @return
      */
     @PostMapping("/register")
-    public ResponseBase register(@RequestBody UserEntity userEntity);
+    ResponseBase register(@RequestBody UserEntity userEntity);
 
     @RequestMapping("/testResponseBase")
-    public ResponseBase testResponseBase();
+    ResponseBase testResponseBase();
 
+    /**
+     * 查找用户信息
+     * @param userId 用户id
+     * @return ResponseBase
+     */
     @PostMapping("/findUser")
-    public ResponseBase findUser(Long userId);
+    ResponseBase findUser(Long userId);
+
+    /**
+     * 用户登入
+     * @param userEntity 用户信息
+     * @return  ResponseBase
+     */
+    @RequestMapping("/login")
+    ResponseBase login(@RequestBody UserEntity userEntity);
+
+    /**
+     * 使用token进行登入
+     * @return ResponseBase
+     */
+    @RequestMapping("/findByUserToken")
+    ResponseBase findByUserToken(String token);
+
+
 
 }

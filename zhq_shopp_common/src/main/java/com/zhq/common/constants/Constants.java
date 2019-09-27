@@ -15,5 +15,9 @@ public interface Constants {
     Integer HTTP_RES_CODE_200 = 200;
     // 系统错误
     Integer HTTP_RES_CODE_500 = 500;
+    //会员token
+    String MEMBER_TOKEN="MEMBER_TOKEN";
+    //登入有效期
+    Long MEMBER_TOKEN_TIMEOUT=(long) 60*60*24*90;
 
 }
