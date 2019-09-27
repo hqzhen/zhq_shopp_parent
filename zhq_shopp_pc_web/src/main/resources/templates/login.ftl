@@ -42,7 +42,7 @@
 						</div>
 						<div class="input-box input-box1 onfocusstyle user-word">
 							<label for="loginname" class="icon-user"></label> <input
-								type="text" name="username" id="loginname" value=""
+								type="text" name="userName" id="loginname" value=""
 								placeholder="用户名/手机号码" class="position-input" maxlength="20"
 								datatype="*" autocomplete="off" />
 							<div class="Validform_checktip formtip">

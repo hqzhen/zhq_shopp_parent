@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,7 +33,7 @@ public class RegisterController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody UserEntity user, HttpServletRequest request) {
+    public String register(UserEntity user, HttpServletRequest request) {
         // 1.调用会员服务注册
         ResponseBase regUser = memberServiceFeign.register(user);
         if (!regUser.getCode().equals(Constants.HTTP_RES_CODE_200)) {

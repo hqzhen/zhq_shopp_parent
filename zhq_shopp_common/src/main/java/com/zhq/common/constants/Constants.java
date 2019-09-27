@@ -17,7 +17,11 @@ public interface Constants {
     Integer HTTP_RES_CODE_500 = 500;
     //会员token
     String MEMBER_TOKEN="MEMBER_TOKEN";
-    //登入有效期
+    //redis token登入有效期
     Long MEMBER_TOKEN_TIMEOUT=(long) 60*60*24*90;
+    //浏览器 cookie token登入有效期
+    Integer COOKIE_TOKEN_TIMEOUT=60*60*24*89;
+    // cookie 会员 totoken 名称
+    String COOKIE_MEMBER_TOKEN ="cookie_member_token";
 
 }

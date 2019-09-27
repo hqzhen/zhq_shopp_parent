@@ -34,7 +34,7 @@
 					<form action="/register" method="post">
 						<div class="input-box input-box1 onfocusstyle user-word">
 							<label for="username" class="icon-user"></label> <input
-								type="text" name="username" id="username" value=""
+								type="text" name="userName" id="username" value=""
 								placeholder="用户名" maxlength="20" autocomplete="off" />
 							<div class="Validform_checktip formtip">
 								<span class="i-tip"><i></i><label>支持中文、字母、数字、“-”“_”的组合</label></span>

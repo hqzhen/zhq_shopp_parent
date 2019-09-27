@@ -20,7 +20,7 @@ public interface UserService {
     /**
      * 用户注册服务
      * @param userEntity 用户实体
-     * @return
+     * @return ResponseBase
      */
     @PostMapping("/register")
     ResponseBase register(@RequestBody UserEntity userEntity);
