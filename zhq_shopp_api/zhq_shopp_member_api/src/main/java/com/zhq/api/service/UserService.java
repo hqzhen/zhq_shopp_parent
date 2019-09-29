@@ -5,8 +5,7 @@ import com.zhq.common.base.ResponseBase;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.Map;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @program: zhq_shopp_parent
@@ -49,7 +48,22 @@ public interface UserService {
      * @return ResponseBase
      */
     @RequestMapping("/findByUserToken")
-    ResponseBase findByUserToken(String token);
+    ResponseBase findByUserToken(@RequestParam("token") String token);
+
+    /**
+     * 使用openId查找用户
+     * @return ResponseBase
+     */
+    @RequestMapping("/findByUserOpenId")
+    ResponseBase findByUserOpenId(@RequestParam("openId") String openId);
+
+    /**
+     * 使用qq登入
+     * @param userEntity 用户信息
+     * @return  ResponseBase
+     */
+    @RequestMapping("/qqLogin")
+    ResponseBase qqLogin(@RequestBody UserEntity userEntity);
 
 
 

@@ -15,6 +15,9 @@ public interface Constants {
     Integer HTTP_RES_CODE_200 = 200;
     // 系统错误
     Integer HTTP_RES_CODE_500 = 500;
+
+    // 未关联QQ
+    Integer HTTP_RES_CODE_201 = 201;
     //会员token
     String MEMBER_TOKEN="MEMBER_TOKEN";
     //redis token登入有效期

@@ -9,7 +9,6 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +25,7 @@ import java.util.LinkedHashMap;
 public class LoginController {
     @Autowired
     private MemberServiceFeign memberServiceFeign;
-    private static final String INDEX="index";
+    private static final String INDEX="redirect:/";
     private static final String LOGIN = "login";
 
     @GetMapping("/login")

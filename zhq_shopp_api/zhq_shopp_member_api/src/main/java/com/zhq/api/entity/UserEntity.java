@@ -17,4 +17,5 @@ public class UserEntity extends BaseEntity {
     private String password;
     private String phone;
     private String email;
+    private String openId;
 }

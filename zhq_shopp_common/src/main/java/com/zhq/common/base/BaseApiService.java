@@ -1,10 +1,6 @@
 package com.zhq.common.base;
 
-import com.zhq.common.constants.BaseApiServiceConstants;
 import com.zhq.common.constants.Constants;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @program: zhq_shopp_parent
@@ -24,6 +20,10 @@ public class BaseApiService {
     // 返回失败
     public ResponseBase setResultError(String msg){
         return setResult(Constants.HTTP_RES_CODE_500,msg, null);
+    }
+    // 返回失败
+    public ResponseBase setResultError(Integer code,String msg){
+        return setResult(code,msg, null);
     }
     // 自定义返回结果
     public ResponseBase setResult(Integer code, String msg, Object data) {

@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -91,19 +92,12 @@ public class UserServiceImpl extends BaseApiService implements UserService {
         if(user==null){
             return setResultError("用户名或密码错误！");
         }
-        //3、如果账号密码正确，生成对应的token
-        String userToken = TokenUtils.getUserToken();
-        //4、存放在redis中,key为token,value为userId
-        log.info("###用户信息存放在redis中...key为:{},value为:{}",userToken,user.getId());
-        baseRedisService.setString(userToken,user.getId().toString(),Constants.MEMBER_TOKEN_TIMEOUT);
-        //5、返回token
-        JSONObject jsonObject=new JSONObject();
-        jsonObject.put("userToken",userToken);
-        return setResultSuccess(jsonObject);
+        //3、自动登入
+        return userLogin(user);
     }
 
     @Override
-    public ResponseBase findByUserToken(String token) {
+    public ResponseBase findByUserToken(@RequestParam("token") String token) {
         //1、验证参数
         if(StringUtils.isBlank(token)){
             return setResultError("token为空!");
@@ -121,5 +115,67 @@ public class UserServiceImpl extends BaseApiService implements UserService {
         }
         user.setPassword(null);
         return setResultSuccess(user);
+    }
+
+    /**
+     * 通过openId查找用户
+     * @param openId QQ账号唯一标识
+     * @return ResponseBase
+     */
+    @Override
+    public ResponseBase findByUserOpenId(@RequestParam("openId")String openId) {
+        //1、验证参数
+        if(StringUtils.isBlank(openId)){
+            return setResultError("openId不能为空！");
+        }
+        //2、使用openId 查数据库表 user表对应信息
+        UserEntity user=userDao.findByUserOpenId(openId);
+        if(user==null){
+            return setResultError(Constants.HTTP_RES_CODE_201,"未关联QQ！");
+        }
+        //3、自动登入
+        return userLogin(user);
+    }
+
+    /**
+     * 用户登入
+     * @param user  会员
+     * @return ResponseBase
+     */
+    private ResponseBase userLogin(UserEntity user) {
+        //1、生成对应的token
+        String userToken = TokenUtils.getUserToken();
+        //2、存放在redis中,key为token,value为userId
+        log.info("###用户信息存放在redis中...key为:{},value为:{}",userToken,user.getId());
+        baseRedisService.setString(userToken,user.getId().toString(),Constants.MEMBER_TOKEN_TIMEOUT);
+        //3、返回token
+        JSONObject jsonObject=new JSONObject();
+        jsonObject.put("userToken",userToken);
+        return setResultSuccess(jsonObject);
+    }
+
+    /**
+     * 通过qq登入
+     * @param userEntity 用户信息
+     * @return ResponseBase
+     */
+    @Override
+    public ResponseBase qqLogin(UserEntity userEntity) {
+        if(StringUtils.isBlank(userEntity.getOpenId())){
+            return setResultError("openId不能为空！");
+        }
+        ResponseBase responseBase = login(userEntity);
+        if(!responseBase.getCode().equals(Constants.HTTP_RES_CODE_200)){
+            return responseBase;
+        }
+        JSONObject jsonObject = (JSONObject) responseBase.getData();
+        String userToken = jsonObject.getString("userToken");
+        ResponseBase byUserToken = findByUserToken(userToken);
+        UserEntity userTokenData = (UserEntity) byUserToken.getData();
+        Integer upDateByOpenIdUser = userDao.upDateByOpenIdUser(userEntity.getId(), userTokenData.getOpenId());
+        if(upDateByOpenIdUser<=0){
+            return  setResultError("QQ账号关联失败！");
+        }
+        return responseBase;
     }
 }
