@@ -1,5 +1,7 @@
 package com.zhq.controller;
 
+import com.qq.connect.QQConnectException;
+import com.qq.connect.oauth.Oauth;
 import com.zhq.api.entity.UserEntity;
 import com.zhq.common.base.ResponseBase;
 import com.zhq.common.constants.Constants;
@@ -10,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -48,5 +51,18 @@ public class LoginController {
         }
         CookieUtil.addCookie(response,Constants.COOKIE_MEMBER_TOKEN,userToken,Constants.COOKIE_TOKEN_TIMEOUT);
         return INDEX;
+    }
+
+    /**
+     * 生成qq授权登入链接
+     * @param request
+     * @return
+     * @throws QQConnectException
+     */
+    @RequestMapping("/localQQLogin")
+    public String localQQLogin(HttpServletRequest request) throws QQConnectException {
+        //生成授权链接
+        String authorizeURL = new Oauth().getAuthorizeURL(request);
+        return "redirect:"+authorizeURL;
     }
 }
