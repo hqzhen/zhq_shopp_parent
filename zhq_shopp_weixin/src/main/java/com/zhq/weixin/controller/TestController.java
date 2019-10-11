@@ -73,6 +73,7 @@ public class TestController {
      */
     @RequestMapping("/getMPOAuth2Url")
     public String getMPOAuth2Url(String url) {
+        //构造网页授权url
         return wxMpService.oauth2buildAuthorizationUrl(url, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null);
     }
 
@@ -97,9 +98,13 @@ public class TestController {
      */
     @RequestMapping("/getUserInfo")
     public String getUserInfo(String code) throws WxErrorException {
+        //获得access token
         WxMpOAuth2AccessToken wxMpOAuth2AccessToken = wxMpService.oauth2getAccessToken(code);
+        //获得用户基本信息
         WxMpUser wxMpUser = wxMpService.oauth2getUserInfo(wxMpOAuth2AccessToken, null);
+        //刷新access token
         wxMpOAuth2AccessToken = wxMpService.oauth2refreshAccessToken(wxMpOAuth2AccessToken.getRefreshToken());
+        //验证access token
         boolean valid = wxMpService.oauth2validateAccessToken(wxMpOAuth2AccessToken);
         System.out.println("valid:"+valid);
         return  wxMpUser.toString();
