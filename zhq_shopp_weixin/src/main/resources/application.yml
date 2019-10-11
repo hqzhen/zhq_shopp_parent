@@ -1,0 +1,14 @@
+server:
+  port: 8765
+logging:
+  level:
+    org.springframework.web: INFO
+    com.github.binarywang.demo.wx.mp: DEBUG
+    me.chanjar.weixin: DEBUG
+wx:
+  mp:
+    configs:
+      - appId: wxc87de7f2fb438e12
+        secret: 3b644ad740e045c89f7ff227b4e1516c
+        token: zhq_test_WX
+        aesKey:
