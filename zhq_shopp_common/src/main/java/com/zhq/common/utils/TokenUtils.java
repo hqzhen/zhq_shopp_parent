@@ -18,5 +18,8 @@ public class TokenUtils {
     public static String getUserToken(){
         return Constants.MEMBER_TOKEN+"-"+UUID.randomUUID();
     }
+    public static String getPayToken(){
+        return Constants.MEMBER_PAY+"-"+UUID.randomUUID();
+    }
 
 }

@@ -9,9 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <properties>
+        <weixin-java-mp.version>3.5.0</weixin-java-mp.version>
+    </properties>
+
     <packaging>jar</packaging>
 
     <artifactId>zhq_shopp_common</artifactId>
+
+    <dependencies>
+        <!--集成微信开发-->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>${weixin-java-mp.version}</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

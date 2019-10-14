@@ -20,6 +20,8 @@ public interface Constants {
     Integer HTTP_RES_CODE_201 = 201;
     //会员token
     String MEMBER_TOKEN="MEMBER_TOKEN";
+    //支付token
+    String MEMBER_PAY="MEMBER_PAY";
     //redis token登入有效期
     Long MEMBER_TOKEN_TIMEOUT=(long) 60*60*24*90;
     //浏览器 cookie token登入有效期
