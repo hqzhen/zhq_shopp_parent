@@ -23,9 +23,10 @@ public interface Constants {
     //支付token
     String MEMBER_PAY="MEMBER_PAY";
     //redis token登入有效期
-    Long MEMBER_TOKEN_TIMEOUT=(long) 60*60*24*90;
+    Long MEMBER_TOKEN_TIMEOUT=(long) (60*60*24*90);
     //浏览器 cookie token登入有效期
     Integer COOKIE_TOKEN_TIMEOUT=60*60*24*89;
+    Long PAY_TOKEN_TIMEOUT=(long) (60*15);
     // cookie 会员 totoken 名称
     String COOKIE_MEMBER_TOKEN ="cookie_member_token";
 
