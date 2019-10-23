@@ -26,10 +26,10 @@ public class AlipayConfig {
     public static String alipay_public_key = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAgOWeSao5mnkH3uxkxN8erPGbFX0knkOvLH5ocXeOINkUvuSviw2PtePVspiU5JoN7dPxXxL7m/lsBH0CQcGpqI5tjlOEGt80pHBMZyojppeq2GhveN4hASLhsnjqyjvLH6bULkBVTIlYBbtWi47KiaSdR4VysL5PVb0CGdqfdVTgHCpYdpQL7qZYEsDiRXBgzDjV46jN1cTv+IPFtanZwnblwcZiyKgHG9Y5jJC2BzPvHsTqVivCTqFOhnuZFaR90mXZ6fS+SBlenm2TCKEROFrReeZ+wv/LUhXaGe/algHynrECBlnchBp9fCgLXw8qKB32NfbPTYS77saItclA0wIDAQAB";
 
     // 服务器异步通知页面路径  需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String notify_url = "https://5ff87332.ngrok.io/notify_url.jsp";
+	public static String notify_url = "https://5ff87332.ngrok.io/alibaba/callBack/notifyUrl";
 
     // 页面跳转同步通知页面路径 需http://格式的完整路径，不能加?id=123这类自定义参数，必须外网可以正常访问
-	public static String return_url = "https://5ff87332.ngrok.io/return_url.jsp";
+	public static String return_url = "https://5ff87332.ngrok.io/alibaba/callBack/returnUrl";
 
     // 签名方式
 	public static String sign_type = "RSA2";
