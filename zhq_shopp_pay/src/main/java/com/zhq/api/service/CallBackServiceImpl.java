@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSONObject;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.internal.util.AlipaySignature;
 import com.zhq.api.config.AlipayConfig;
+import com.zhq.api.dao.PaymentInfoDao;
+import com.zhq.api.entity.PaymentInfo;
 import com.zhq.common.base.BaseApiService;
 import com.zhq.common.base.ResponseBase;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
@@ -20,7 +23,8 @@ import java.util.Map;
 @Slf4j
 @RestController
 public class CallBackServiceImpl extends BaseApiService implements CallBackService {
-
+    @Autowired
+    private PaymentInfoDao paymentInfoDao;
     /**
      * 支付宝同步支付
      * @param params 支付宝参数
@@ -61,6 +65,47 @@ public class CallBackServiceImpl extends BaseApiService implements CallBackServi
 
     @Override
     public String asynCallBack(Map<String, String> params) {
-        return null;
+
+        //1、日志记录
+        log.info("#####支付宝同步通知synCallBack()开始，params:{}", params);
+        try {
+            //2、调用SDK验证签名
+            boolean signVerified =
+                    AlipaySignature.rsaCheckV1(
+                            params, AlipayConfig.alipay_public_key, AlipayConfig.charset, AlipayConfig.sign_type);
+            log.info("#####调用支付宝SDK验证签名，signVerified:{}", signVerified);
+            //——请在这里编写您的程序（以下代码仅作参考）——
+            if (!signVerified) {
+                return "fail";
+            }//商户订单号
+
+            String outTradeNo = params.get("out_trade_no");
+            //支付宝交易号
+            String tradeNo = params.get("trade_no");
+            //付款金额
+            String totalAmount = params.get("total_amount");
+            //修改支付状态
+            PaymentInfo paymentInfo = paymentInfoDao.getByOrderIdPayInfo(outTradeNo);
+            if(paymentInfo==null){
+                return "fail";
+            }
+            if(paymentInfo.getState()==1){
+                return "success";
+            }
+            paymentInfo.setState(1);//标记支付
+            paymentInfo.setPayMessage(params.toString());//日志记录
+            paymentInfo.setPlatformorderId(tradeNo);//支付宝交易id
+            Integer count = paymentInfoDao.updatePayInfo(paymentInfo);
+            if(count<=0){
+                return "fail";
+            }
+            //修改订单状态
+            return "success";
+        } catch (AlipayApiException e) {
+            log.info("#####支付宝同步通知synCallBack()异常，ERROR:{}", e);
+            return "fail";
+        }finally {
+            log.info("#####支付宝同步通知synCallBack()结束，params:{}", params);
+        }
     }
 }

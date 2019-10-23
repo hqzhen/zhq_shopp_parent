@@ -16,6 +16,7 @@
         <module>zhq_shopp_pc_web</module>
         <module>zhq_shopp_weixin</module>
         <module>zhq_shopp_pay</module>
+        <module>zhq_shopp_order</module>
     </modules>
     <packaging>pom</packaging>
 
